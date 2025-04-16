@@ -140,10 +140,7 @@
     <!-- Left: News List -->
     <div class="news-list" id="news-list">
       <h2>Top News Stories</h2>
-      <div class="news-item" onclick="loadNewsContent('https://www.reddit.com/r/worldnews/comments/xyz1')">Story 1</div>
-      <div class="news-item" onclick="loadNewsContent('https://www.reddit.com/r/worldnews/comments/xyz2')">Story 2</div>
-      <div class="news-item" onclick="loadNewsContent('https://www.reddit.com/r/worldnews/comments/xyz3')">Story 3</div>
-      <!-- Add more news items dynamically -->
+      <!-- News items will be dynamically added here -->
     </div>
 
     <!-- Right: News Content -->
@@ -184,7 +181,31 @@
         console.error(err);
       });
 
-    // Fetching Reddit top news
+    // Fetching Reddit top news from /r/worldnews
+    fetch('https://www.reddit.com/r/worldnews/top.json?limit=10')
+      .then(response => response.json())
+      .then(data => {
+        const newsList = document.getElementById('news-list');
+        const posts = data.data.children;
+
+        posts.forEach(post => {
+          const title = post.data.title;
+          const url = `https://www.reddit.com${post.data.permalink}`;
+
+          // Create a clickable news item
+          const newsItem = document.createElement('div');
+          newsItem.className = 'news-item';
+          newsItem.textContent = title;
+          newsItem.onclick = () => loadNewsContent(url); // On click, load content
+          newsList.appendChild(newsItem);
+        });
+      })
+      .catch(err => {
+        console.error('Error fetching Reddit news:', err);
+        document.getElementById('news-list').innerHTML = 'Failed to load news.';
+      });
+
+    // Fetching Reddit post content
     function loadNewsContent(url) {
       fetch(url + '.json') // Get the Reddit post in JSON format
         .then(response => response.json())
