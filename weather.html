@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Stardos+Stencil&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #111;
+      border-bottom: 2px solid #333;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .nav a:hover {
+      color: #ccc;
+    }
+
+    #clock {
+      font-size: 1.5rem;
+    }
+
+    h1 {
+      font-family: 'Stardos Stencil', cursive;
+      font-size: 3rem;
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    #weather-box {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: #111;
+      border: 1px solid #333;
+      border-radius: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="weather.html">Weather</a>
+    </div>
+    <div id="clock">--:--:--</div>
+  </header>
+
+  <h1>Weather</h1>
+
+  <div id="weather-box">Loading weather...</div>
+
+  <script>
+    // Clock updater
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+      document.getElementById('clock').textContent = time;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Weather fetch using wttr.in (free, no key, plain text!)
+    fetch('https://wttr.in/?format=3')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('weather-box').textContent = data;
+      })
+      .catch(err => {
+        document.getElementById('weather-box').textContent = 'Failed to load weather.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
