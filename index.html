@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clock Prototype</title>
+  <title>Prototype Home</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Stardos+Stencil&display=swap');
@@ -14,92 +14,116 @@
       background-color: #000;
       color: #fff;
       font-family: 'Share Tech Mono', monospace;
-      height: 100vh;
+    }
+
+    header {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
+      padding: 1rem 2rem;
+      background-color: #111;
+      border-bottom: 2px solid #333;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .nav a:hover {
+      color: #ccc;
     }
 
     #clock {
-      font-size: 10vw;
-      font-weight: bold;
+      font-size: 1.5rem;
     }
 
-    #date {
+    h1 {
       font-family: 'Stardos Stencil', cursive;
-      font-size: 4vw;
-      margin-top: 1rem;
+      font-size: 4rem;
+      text-align: center;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
     }
 
-    #button-container {
-      margin-top: 2rem;
+    h2 {
+      font-family: 'Stardos Stencil', cursive;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 3rem;
     }
 
-    .track-button {
-      background-color: #222;
-      color: #fff;
-      border: 2px solid #fff;
+    .buttons button {
       padding: 1rem 1.5rem;
       font-size: 1.5rem;
-      border-radius: 10px;
+      font-family: 'Share Tech Mono', monospace;
+      border: 2px solid #fff;
+      background-color: #000;
+      color: #fff;
       cursor: pointer;
-      transition: background 0.3s ease;
+      border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
     }
 
-    .track-button:hover {
-      background-color: #444;
+    .buttons button:hover {
+      background-color: #fff;
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <div id="clock">--:--:--</div>
-  <div id="date">-- -- ----</div>
+  <header>
+    <div class="nav">
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="weather.html">Weather</a>
+    </div>
+    <div id="clock">--:--:--</div>
+  </header>
 
-  <div id="button-container">
-    <!-- Buttons 1 to 10 -->
-    <button class="track-button" onclick="trackClick(1)">1</button>
-    <button class="track-button" onclick="trackClick(2)">2</button>
-    <button class="track-button" onclick="trackClick(3)">3</button>
-    <button class="track-button" onclick="trackClick(4)">4</button>
-    <button class="track-button" onclick="trackClick(5)">5</button>
-    <button class="track-button" onclick="trackClick(6)">6</button>
-    <button class="track-button" onclick="trackClick(7)">7</button>
-    <button class="track-button" onclick="trackClick(8)">8</button>
-    <button class="track-button" onclick="trackClick(9)">9</button>
-    <button class="track-button" onclick="trackClick(10)">10</button>
+  <h1 id="time">--:--:--</h1>
+  <h2 id="date">-- --- ----</h2>
+
+  <div class="buttons">
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+    <button>6</button>
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
+    <button>10</button>
   </div>
 
   <script>
-    function updateClock() {
+    function updateTime() {
       const now = new Date();
-      const time = now.toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-      });
-      const date = now.toLocaleDateString([], {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
-      document.getElementById('clock').textContent = time;
-      document.getElementById('date').textContent = date;
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const dateStr = now.toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('time').textContent = timeStr;
+      document.getElementById('date').textContent = dateStr;
+      document.getElementById('clock').textContent = timeStr;
     }
 
-    function trackClick(buttonNumber) {
-      const now = new Date();
-      console.log(`Button ${buttonNumber} clicked at ${now.toLocaleTimeString()}`);
-      // Here you could send the event to Adobe Analytics or any service
-    }
-
-    updateClock();
-    setInterval(updateClock, 1000);
+    updateTime();
+    setInterval(updateTime, 1000);
   </script>
 </body>
 </html>
