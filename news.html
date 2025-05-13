@@ -5,7 +5,123 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weather and News</title>
   <style>
-    /* Styles here (unchanged) */
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Stardos+Stencil&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #111;
+      border-bottom: 2px solid #333;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .nav a:hover {
+      color: #ccc;
+    }
+
+    #clock {
+      font-size: 1.5rem;
+    }
+
+    h1 {
+      font-family: 'Stardos Stencil', cursive;
+      font-size: 3rem;
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    #weather-box {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: #111;
+      border: 1px solid #333;
+      border-radius: 10px;
+      white-space: pre-wrap;
+    }
+
+    /* Layout */
+    .container {
+      display: flex;
+      gap: 2rem;
+      padding: 1rem 2rem;
+    }
+
+    /* Left - News list */
+    .news-list {
+      width: 30%;
+      overflow-y: scroll;
+      height: 80vh;
+      border: 1px solid #333;
+      background-color: #222;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .news-item {
+      margin-bottom: 1rem;
+      cursor: pointer;
+      padding: 1rem;
+      background-color: #333;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .news-item:hover {
+      background-color: #444;
+    }
+
+    /* Right - News content (Reader Mode) */
+    .news-content {
+      width: 65%;
+      height: 80vh;
+      overflow-y: scroll;
+      padding: 1rem;
+      background-color: #111;
+      border-radius: 10px;
+      border: 1px solid #333;
+    }
+
+    /* Style for reader view */
+    .reader-view {
+      font-family: 'Share Tech Mono', monospace;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    .reader-view h2 {
+      font-family: 'Stardos Stencil', cursive;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .reader-view p {
+      margin-bottom: 1rem;
+    }
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-26M230VK7C"></script>
